@@ -21,10 +21,6 @@ jobs:
           args: "--format=tar --file=bacula-web --profile -v"
           command: archive
 
-      - name: debug
-        run: |
-          tar -tf bacula-web.tar
-
       - name: create temp dir
         run: |
           mkdir bacula-web
@@ -32,10 +28,6 @@ jobs:
       - name: extract archive
         run: |
           tar xf bacula-web.tar -C bacula-web/
-
-      - name: debug too
-        run: |
-          ls -l bacula-web/
 
       - name: composer install
         uses: php-actions/composer@v6
@@ -49,8 +41,16 @@ jobs:
         run: |
           tar -cvzf bacula-web-release.tgz bacula-web/
 
+      - name: generate sha signatures
+        run: |
+          sha256sum bacula-web-release.tgz > bacula-web-sha256.txt
+          sha512sum bacula-web-release.tgz > bacula-web-sha512.txt
+
       - name: save artifact
         uses: actions/upload-artifact@v4
         with:
           name: release-archive
-          path: bacula-web-release.tgz
+          path: |
+            bacula-web-release.tgz
+            bacula-web-sha256.txt
+            bacula-web-sha512.txt
