@@ -37,11 +37,13 @@ jobs:
         run: |
           ls -l temp/
 
-      #- uses: php-actions/composer@v6
-      #  with:
-      #    php_version: "8.0"
-      #    php_extensions: pdo_mysql pdo_sqlite pdo_pgsql gettext
-      #    dev: no
+      - name: composer install
+        uses: php-actions/composer@v6
+        with:
+          php_version: "8.0"
+          php_extensions: pdo_mysql pdo_sqlite pdo_pgsql gettext
+          dev: no
+          working_dir: "temp"
 
       #    command: archive
 
