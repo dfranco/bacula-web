@@ -24,7 +24,18 @@ jobs:
       - name: debug
         run: |
           tar -tf bacula-web.tar
-        
+
+      - name: create temp dir
+        run: |
+          mkdir temp
+
+      - name: extract archive
+        run: |
+          tar xf bacula-web.tar -C temp/
+
+      - name: debug too
+        run: |
+          ls -l temp/
 
       #- uses: php-actions/composer@v6
       #  with:
