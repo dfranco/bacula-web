@@ -27,15 +27,15 @@ jobs:
 
       - name: create temp dir
         run: |
-          mkdir temp
+          mkdir bacula-web
 
       - name: extract archive
         run: |
-          tar xf bacula-web.tar -C temp/
+          tar xf bacula-web.tar -C bacula-web/
 
       - name: debug too
         run: |
-          ls -l temp/
+          ls -l bacula-web/
 
       - name: composer install
         uses: php-actions/composer@v6
@@ -43,18 +43,14 @@ jobs:
           php_version: "8.0"
           php_extensions: pdo_mysql pdo_sqlite pdo_pgsql gettext
           dev: no
-          working_dir: "temp"
+          working_dir: "bacula-web"
 
       - name: create archive
         run: |
-          tar -cvzf bacula-web-release.tgz temp/
+          tar -cvzf bacula-web-release.tgz bacula-web/
 
       - name: save artifact
         uses: actions/upload-artifact@v4
         with:
           name: release-archive
           path: bacula-web-release.tgz
-
-      #    command: archive
-
-          # sh "composer archive --format=tar --dir=../ --file=bacula-web-${params.VERSION} --profile -v"
