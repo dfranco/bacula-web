@@ -2,8 +2,8 @@ name: Build release archive
 
 on:
   push:
-    branches:
-      - 'chore/**'
+    tags:
+      - 'v*'
 
 jobs:
   build:
@@ -39,19 +39,19 @@ jobs:
 
       - name: create archive
         run: |
-          tar -cvzf bacula-web-release.tgz bacula-web/
+          tar -cvzf bacula-web-${{ github.ref_name }}.tgz bacula-web/
 
       - name: generate sha signatures
         run: |
-          sha256sum bacula-web-release.tgz > bacula-web-sha256.txt
-          sha512sum bacula-web-release.tgz > bacula-web-sha512.txt
+          sha256sum bacula-web-${{ github.ref_name }}.tgz > bacula-web-sha256.txt
+          sha512sum bacula-web-${{ github.ref_name }}.tgz > bacula-web-sha512.txt
 
       - name: save artifact
         uses: actions/upload-artifact@v4
         with:
           name: release-archive
           path: |
-            bacula-web-release.tgz
+            bacula-web-${{ github.ref_name }}.tgz
             bacula-web-sha256.txt
             bacula-web-sha512.txt
 
