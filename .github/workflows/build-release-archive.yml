@@ -1,0 +1,24 @@
+name: Composer test
+
+on:
+  push:
+    branches:
+      - 'chore/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - uses: php-actions/composer@v6
+        with:
+          php_version: "8.0"
+          php_extensions: pdo_mysql pdo_sqlite pdo_pgsql gettext
+          dev: no
+          args: "--prefer-dist"
+          command: create-project
+          working_dir: "temp/"
+
