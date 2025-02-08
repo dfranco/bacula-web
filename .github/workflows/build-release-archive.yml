@@ -45,6 +45,16 @@ jobs:
           dev: no
           working_dir: "temp"
 
+      - name: create archive
+        run: |
+          tar -cvzf bacula-web-release.tgz temp/
+
+      - name: save artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-archive
+          path: bacula-web-release.tgz
+
       #    command: archive
 
           # sh "composer archive --format=tar --dir=../ --file=bacula-web-${params.VERSION} --profile -v"
