@@ -54,3 +54,8 @@ jobs:
             bacula-web-release.tgz
             bacula-web-sha256.txt
             bacula-web-sha512.txt
+
+      - name: GitHub Tag Name
+        run: |
+          echo "Tag name from GITHUB_REF_NAME: $GITHUB_REF_NAME"
+          echo "Tag name from github.ref_name: ${{ github.ref_name }}"
