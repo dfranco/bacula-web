@@ -21,8 +21,15 @@ jobs:
         with:
           php_version: "8.0"
           php_extensions: pdo_mysql pdo_sqlite pdo_pgsql gettext
-          dev: no
-          args: "--prefer-dist"
-          command: create-project
-          working_dir: "temp/"
+          args: "--format=tar --dir=./temp --file=bacula-web --profile -v"
+          command: archive
 
+      #- uses: php-actions/composer@v6
+      #  with:
+      #    php_version: "8.0"
+      #    php_extensions: pdo_mysql pdo_sqlite pdo_pgsql gettext
+      #    dev: no
+
+      #    command: archive
+
+          # sh "composer archive --format=tar --dir=../ --file=bacula-web-${params.VERSION} --profile -v"
