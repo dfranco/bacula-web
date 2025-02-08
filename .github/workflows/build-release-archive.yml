@@ -13,21 +13,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Create dir
-        run: |
-          mkdir temp
-
       - name: create archive
         uses: php-actions/composer@v6
         with:
           php_version: "8.0"
           php_extensions: pdo_mysql pdo_sqlite pdo_pgsql gettext
-          args: "--format=tar --dir=./temp --file=bacula-web --profile -v"
+          args: "--format=tar --file=bacula-web --profile -v"
           command: archive
 
       - name: debug
         run: |
-          tar -tf temp/bacula-web.tar
+          tar -tf bacula-web.tar
         
 
       #- uses: php-actions/composer@v6
