@@ -1,4 +1,4 @@
-name: Composer test
+name: Build release archive
 
 on:
   push:
